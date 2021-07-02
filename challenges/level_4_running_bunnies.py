@@ -36,11 +36,14 @@ def floyd_warshall(graph):
 
 def save_bunnies(distance, time_limit):
     possible_paths = []
-    build_possible_paths(distance, time_limit, 8, 0, [], possible_paths)
+    max_depth = 8 # arbitrary depth
+    start_node = 0
+    end_node = len(distance) - 1
+    build_possible_paths(distance, time_limit, max_depth, start_node, [], possible_paths)
 
-    best_path = get_best_path(possible_paths, len(distance) - 1)
+    best_path = get_best_path(possible_paths, end_node)
 
-    return [i for i in best_path if i != 0 and i != len(distance) - 1]
+    return [i for i in best_path if i != start_node and i != end_node]
 
 
 def build_possible_paths(times, time_limit, counter, current, path, possible_paths):
